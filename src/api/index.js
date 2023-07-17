@@ -1,29 +1,67 @@
-import axios from "axios";
-
-export const getNearbyCities = async (coordinates) => {
-	console.log("coordinates ", coordinates);
+export const placeSearch = async (coordinates) => {
 	const { lat, lng } = coordinates;
-
-	const options = {
-		method: "GET",
-		url: "https://booking-com.p.rapidapi.com/v1/hotels/nearby-cities",
-		params: {
-			latitude: lat,
-			longitude: lng,
-			locale: "en-gb",
-		},
-		headers: {
-			"X-RapidAPI-Key":
-				"1337516513msh551bb42aca4977cp16ceebjsn35c31582fbb0",
-			"X-RapidAPI-Host": "booking-com.p.rapidapi.com",
-		},
-	};
-
+	console.log("coordinates", lat, lng);
 	try {
-		const response = await axios.request(options);
-		console.log("cities ", response.data);
-		return response.data;
+		const searchParams = new URLSearchParams({
+			query: "coffee",
+			ll: `${lat},${lng}`,
+		});
+		const results = await fetch(
+			`https://api.foursquare.com/v3/places/search?${searchParams}`,
+			{
+				method: "GET",
+				headers: {
+					Accept: "application/json",
+					Authorization:
+						"fsq3BqDGjzH7gNFYLD3AkSg9vk/Bq6ZLFHarWneJGw7F9ok=",
+				},
+			}
+		);
+		const data = await results.json();
+		console.log("responseData", data);
+		return data;
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+export const getPlaceDetails = async () => {
+	try {
+		const placeDetail = await fetch(
+			"https://api.foursquare.com/v3/places/49d51ce3f964a520675c1fe3",
+			{
+				method: "GET",
+				headers: {
+					accept: "application/json",
+					Authorization:
+						"fsq3BqDGjzH7gNFYLD3AkSg9vk/Bq6ZLFHarWneJGw7F9ok=",
+				},
+			}
+		);
+		const data = await placeDetail.json();
+		console.log("getPlaceDetails", data);
+		return data;
 	} catch (error) {
 		console.error(error);
+	}
+};
+
+export const getPlaceImages = async (fsq_id) => {
+	try {
+		const results = await fetch(
+			`https://api.foursquare.com/v3/places/${fsq_id}/photos`,
+			{
+				method: "GET",
+				headers: {
+					accept: "application/json",
+					Authorization:
+						"fsq3BqDGjzH7gNFYLD3AkSg9vk/Bq6ZLFHarWneJGw7F9ok=",
+				},
+			}
+		);
+		const data = await results.json();
+		return data;
+	} catch (error) {
+		console.log(error);
 	}
 };
