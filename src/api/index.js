@@ -1,9 +1,9 @@
-export const placeSearch = async (coordinates) => {
+export const placeSearch = async (coordinates, category) => {
 	const { lat, lng } = coordinates;
 	console.log("coordinates", lat, lng);
 	try {
 		const searchParams = new URLSearchParams({
-			query: "coffee",
+			query: category,
 			ll: `${lat},${lng}`,
 		});
 		const results = await fetch(
@@ -61,6 +61,26 @@ export const getPlaceImages = async (fsq_id) => {
 		);
 		const data = await results.json();
 		return data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+export const getPlaceTips = async (fsq_id) => {
+	try {
+		const results = await fetch(
+			`https://api.foursquare.com/v3/places/${fsq_id}/tips?limit=1`,
+			{
+				method: "GET",
+				headers: {
+					accept: "application/json",
+					Authorization:
+						"fsq3BqDGjzH7gNFYLD3AkSg9vk/Bq6ZLFHarWneJGw7F9ok=",
+				},
+			}
+		);
+		const data = await results.json();
+		console.log("tip: " + data);
+		return data[0].text;
 	} catch (error) {
 		console.log(error);
 	}
