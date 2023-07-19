@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Navbar = ({ selectedCategory }) => {
+const Navbar = ({ selectedCategory, setSelectedCategory }) => {
 	// const [searchedLocationsList, setSearchedLocationsList] = useState([]);
 
 	console.log("NavbarselectedCategory", selectedCategory);
@@ -20,6 +20,7 @@ const Navbar = ({ selectedCategory }) => {
 		console.log("typedTexttypedTexttypedTexttypedTexttypedText", typedText);
 		setSearchedText(typedText);
 		console.log(searchedText);
+		setSelectedCategory(typedText);
 	};
 	return (
 		<nav className='flex items-center justify-between flex-wrap bg-gray-500 p-2'>
