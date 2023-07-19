@@ -1,33 +1,37 @@
 import React from "react";
 import "../../styles/tailwind.css";
 import Card from "../card";
+import Chip from "../chip";
 
 const dropDownCategories = [
-	{ category: "Hotels" },
-	{ category: "Coffee" },
-	{ category: "Restaurants" },
-	{ category: "Airports" },
+	{
+		category: "Hotels",
+		image: "https://maps.gstatic.com/consumer/images/icons/2x/hotel_grey800_18dp.png",
+	},
+	{
+		category: "Coffee",
+		image: "https://img.icons8.com/?size=1x&id=109214&format=png",
+	},
+	{
+		category: "Restaurants",
+		image: "https://maps.gstatic.com/consumer/images/icons/2x/restaurant_grey800_18dp.png",
+	},
 ];
 
 const SideMenu = ({ setSelectedCategory, places }) => {
 	return (
 		<div className='right-side flex flex-col items-center w-96 h-screen  overflow-scroll'>
-			<select
-				name='location'
-				id='location'
-				className='w-full max-w-sm mt-5 border-2 border-black p-2'
-				onChange={(e) => {
-					console.log("e.target.value ", e.target.value);
-					setSelectedCategory(e.target.value);
-				}}>
-				{dropDownCategories.map(({ category }) => (
-					<option key={category} value={category}>
-						{category}
-					</option>
+			<div className='mt-4 flex'>
+				{dropDownCategories?.map(({ category, image }) => (
+					<Chip
+						key={category}
+						category={category}
+						setSelectedCategory={setSelectedCategory}
+						image={image}
+					/>
 				))}
-			</select>
-
-			<div className='cards'>
+			</div>
+			<div className='cards inline-block'>
 				{places?.map((place) => {
 					return <Card key={places.fsq_id} place={place} />;
 				})}
