@@ -9,6 +9,7 @@ import {
 import "../../styles/tailwind.css"; // Very important as it loads Leaflet's CSS
 import { Icon } from "leaflet";
 import { v4 as uuidv4 } from "uuid";
+import MiniCard from "../miniCard";
 
 // to use any marker, use following method -
 
@@ -17,7 +18,7 @@ const redIcon = new Icon({
 	iconSize: [40, 40],
 });
 
-const Map = ({ places, marker, setMarker }) => {
+const Map = ({ places, marker, setMarker, selectedCategory }) => {
 	function SetViewOnClick() {
 		const map = useMapEvent("click", (e) => {
 			console.log("click event info => ", e);
@@ -31,7 +32,7 @@ const Map = ({ places, marker, setMarker }) => {
 		<MapContainer
 			key={JSON.stringify([marker.lat, marker.latitude])}
 			center={marker}
-			zoom={12}
+			zoom={15}
 			scrollWheelZoom={true}>
 			<TileLayer
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -40,16 +41,16 @@ const Map = ({ places, marker, setMarker }) => {
 			<Marker position={marker}>
 				<Popup>{/* {marker.lat} {marker.lng} */}See This</Popup>
 			</Marker>
-			{places?.map(({ geocodes, location }) => {
-				console.log("geocodes", geocodes.main);
+			{places?.map(({ geocodes, location, name, fsq_id }) => {
+				// console.log("geocodes", geocodes.main);
 				const { latitude, longitude } = geocodes.main;
 				return (
 					<Marker
 						key={uuidv4()}
 						icon={redIcon}
 						position={[latitude, longitude]}>
-						<Popup>
-							{latitude}, {longitude}
+						<Popup className='w-74 bg-white'>
+							<MiniCard fsq_id={fsq_id} cardName={name} />
 						</Popup>
 					</Marker>
 				);
