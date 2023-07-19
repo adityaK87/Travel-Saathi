@@ -1,6 +1,16 @@
 import { Carousel } from "@material-tailwind/react";
+import React, { useState, useEffect } from "react";
+import { getPlaceImages } from "../../api";
 
-export default function ImageSlider({ images }) {
+export default function ImageSlider({ fsq_id }) {
+	const [images, setImages] = useState([]);
+
+	useEffect(() => {
+		getPlaceImages(fsq_id).then((imageObj) => {
+			setImages(imageObj);
+		});
+	}, [fsq_id]);
+
 	return (
 		<Carousel
 			className='rounded-xl'
@@ -27,6 +37,7 @@ export default function ImageSlider({ images }) {
 							src={`${prefix}${width}x${height}${suffix}`}
 							alt={created_at}
 							className='h-full w-full object-cover aspect-video'
+							loading='lazy'
 						/>
 					);
 				}
