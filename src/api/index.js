@@ -5,6 +5,7 @@ export const placeSearch = async (coordinates, category) => {
 		const searchParams = new URLSearchParams({
 			query: category,
 			ll: `${lat},${lng}`,
+			sort: "DISTANCE",
 		});
 		const results = await fetch(
 			`https://api.foursquare.com/v3/places/search?${searchParams}`,
