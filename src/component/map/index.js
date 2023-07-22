@@ -32,15 +32,17 @@ const Map = ({ places, marker, setMarker, selectedCategory }) => {
 		<MapContainer
 			key={JSON.stringify([marker.lat, marker.latitude])}
 			center={marker}
-			zoom={15}
+			zoom={13}
 			scrollWheelZoom={true}>
 			<TileLayer
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 				url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 			/>
+
 			<Marker position={marker}>
 				<Popup>{/* {marker.lat} {marker.lng} */}See This</Popup>
 			</Marker>
+
 			{places?.map(({ geocodes, location, name, fsq_id }) => {
 				// console.log("geocodes", geocodes.main);
 				const { latitude, longitude } = geocodes.main;
@@ -48,7 +50,11 @@ const Map = ({ places, marker, setMarker, selectedCategory }) => {
 					<Marker
 						key={uuidv4()}
 						icon={redIcon}
-						position={[latitude, longitude]}>
+						position={[latitude, longitude]}
+						eventHandlers={{
+							mouseover: (event) => event.target.openPopup(),
+							mouseout: (event) => event.target.closePopup(),
+						}}>
 						<Popup className='w-74 bg-white'>
 							<MiniCard fsq_id={fsq_id} cardName={name} />
 						</Popup>
