@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Map from "./component/map/index";
 import SideMenu from "./component/sideMenu";
 import Navbar from "./component/navbar";
-import { placeSearch } from "./api";
+import { getNearByPlaces } from "./api";
 import "./styles/tailwind.css";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
 	const [places, setPlaces] = useState();
 
 	useEffect(() => {
-		placeSearch(marker, selectedCategory).then((placesData) => {
+		getNearByPlaces(marker, selectedCategory).then((placesData) => {
 			setPlaces(placesData.results);
 		});
 
@@ -24,7 +24,7 @@ function App() {
 				selectedCategory={selectedCategory}
 				setSelectedCategory={setSelectedCategory}
 			/>
-			<div className='App flex justify-space-between'>
+			<div className='App flex flex-col-reverse justify-space-between w-full sm:flex-row '>
 				<SideMenu
 					setSelectedCategory={setSelectedCategory}
 					places={places}
