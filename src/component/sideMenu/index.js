@@ -33,7 +33,7 @@ const SideMenu = ({ setSelectedCategory, places }) => {
 			</div>
 			<div className='cards inline-block '>
 				{places?.map((place) => {
-					return <Card key={places.fsq_id} place={place} />;
+					return <Card key={place.fsq_id} place={place} />;
 				})}
 			</div>
 		</div>

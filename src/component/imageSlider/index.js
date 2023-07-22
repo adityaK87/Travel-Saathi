@@ -34,7 +34,11 @@ export default function ImageSlider({ fsq_id }) {
 					return (
 						<img
 							key={id}
-							src={`${prefix}${width}x${height}${suffix}`}
+							src={
+								images === undefined || null
+									? "https://i0.wp.com/theluxurytravelexpert.com/wp-content/uploads/2018/10/GB-ROOF-GARDEN-GRANDE-BRETAGNE-HOTEL-ATHENS-GREECE.jpg?ssl=1"
+									: `${prefix}${width}x${height}${suffix}`
+							}
 							alt={created_at}
 							className='h-full w-full object-cover aspect-video'
 							loading='lazy'
