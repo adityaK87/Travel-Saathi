@@ -17,10 +17,11 @@ const Navbar = ({ selectedCategory, setSelectedCategory }) => {
 		setTypedText(e.target.value);
 	};
 	const handleClick = () => {
-		console.log("typedTexttypedTexttypedTexttypedTexttypedText", typedText);
+		console.log("typedText", typedText);
 		setSearchedText(typedText);
 		console.log(searchedText);
-		setSelectedCategory(typedText);
+		localStorage.setItem("chip", searchedText);
+		setSelectedCategory(localStorage.getItem("chip"));
 	};
 	return (
 		<nav className='flex items-center justify-center flex-wrap sm:justify-between bg-[#1f2937] p-2'>

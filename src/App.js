@@ -7,7 +7,9 @@ import "./styles/tailwind.css";
 
 function App() {
 	const [marker, setMarker] = useState({ lat: 51.505, lng: -0.09 });
-	const [selectedCategory, setSelectedCategory] = useState("Hotels");
+	const [selectedCategory, setSelectedCategory] = useState(
+		localStorage.getItem("chip")
+	);
 	const [places, setPlaces] = useState();
 
 	useEffect(() => {
