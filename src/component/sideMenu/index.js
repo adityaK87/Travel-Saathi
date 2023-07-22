@@ -20,7 +20,7 @@ const dropDownCategories = [
 
 const SideMenu = ({ setSelectedCategory, places }) => {
 	return (
-		<div className='right-side flex flex-col items-center w-96 h-screen  overflow-scroll'>
+		<div className='w-11/12 right-side flex flex-col items-center w-full h-screen  sm:overflow-scroll'>
 			<div className='mt-4 flex'>
 				{dropDownCategories?.map(({ category, image }) => (
 					<Chip
@@ -31,7 +31,7 @@ const SideMenu = ({ setSelectedCategory, places }) => {
 					/>
 				))}
 			</div>
-			<div className='cards inline-block'>
+			<div className='cards inline-block '>
 				{places?.map((place) => {
 					return <Card key={places.fsq_id} place={place} />;
 				})}
