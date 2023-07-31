@@ -53,7 +53,7 @@ const Map = ({ places, marker, setMarker, selectedCategory }) => {
 						position={[latitude, longitude]}
 						eventHandlers={{
 							mouseover: (event) => event.target.openPopup(),
-							mouseout: (event) => event.target.closePopup(),
+							// mouseout: (event) => event.target.closePopup(),
 						}}>
 						<Popup className='w-74 bg-white'>
 							<MiniCard fsq_id={fsq_id} cardName={name} />
