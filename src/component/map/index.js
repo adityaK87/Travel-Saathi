@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
 	MapContainer,
 	TileLayer,
@@ -10,6 +10,7 @@ import "../../styles/tailwind.css"; // Very important as it loads Leaflet's CSS
 import { Icon } from "leaflet";
 import { v4 as uuidv4 } from "uuid";
 import MiniCard from "../miniCard";
+import MapContext from "../../context";
 
 // to use any marker, use following method -
 
@@ -18,7 +19,8 @@ const redIcon = new Icon({
 	iconSize: [40, 40],
 });
 
-const Map = ({ places, marker, setMarker, selectedCategory }) => {
+const Map = () => {
+	const { places, marker, setMarker } = useContext(MapContext); //Destructuring the MapContext
 	function SetViewOnClick() {
 		const map = useMapEvent("click", (e) => {
 			console.log("click event info => ", e);

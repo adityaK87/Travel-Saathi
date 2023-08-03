@@ -4,6 +4,7 @@ import SideMenu from "./component/sideMenu";
 import Navbar from "./component/navbar";
 import { getNearByPlaces } from "./api";
 import "./styles/tailwind.css";
+import MapContext from "./context";
 
 function App() {
 	const [marker, setMarker] = useState({ lat: 51.505, lng: -0.09 });
@@ -21,25 +22,21 @@ function App() {
 	}, [marker, selectedCategory]);
 
 	return (
-		<>
-			<Navbar
-				selectedCategory={selectedCategory}
-				setSelectedCategory={setSelectedCategory}
-			/>
+		<MapContext.Provider
+			value={{
+				selectedCategory,
+				setSelectedCategory,
+				places,
+				marker,
+				setMarker,
+			}}>
+			<Navbar />
 			<div className='App flex flex-col-reverse justify-space-between w-full sm:flex-row '>
-				<SideMenu
-					setSelectedCategory={setSelectedCategory}
-					places={places}
-				/>
-				<Map
-					places={places}
-					marker={marker}
-					setMarker={setMarker}
-					selectedCategory={selectedCategory}
-				/>
+				<SideMenu />
+				<Map />
 				{/** Map component will contain the map shown in our React app */}
 			</div>
-		</>
+		</MapContext.Provider>
 	);
 }
 export default App;

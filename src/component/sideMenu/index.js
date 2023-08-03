@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../../styles/tailwind.css";
 import Card from "../card";
 import Chip from "../chip";
+import MapContext from "../../context";
 
 const dropDownCategories = [
 	{
@@ -18,7 +19,9 @@ const dropDownCategories = [
 	},
 ];
 
-const SideMenu = ({ setSelectedCategory, places }) => {
+const SideMenu = () => {
+	const { setSelectedCategory, places } = useContext(MapContext); //Destructuring the MapContext
+
 	return (
 		<div className='w-11/12 right-side flex flex-col items-center w-full h-screen  sm:overflow-scroll'>
 			<div className='mt-4 flex'>

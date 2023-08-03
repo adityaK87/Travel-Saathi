@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import logo from "../../img/logo.png";
+import MapContext from "../../context";
 
-const Navbar = ({ selectedCategory, setSelectedCategory }) => {
-	// const [searchedLocationsList, setSearchedLocationsList] = useState([]);
-
-	console.log("NavbarselectedCategory", selectedCategory);
+const Navbar = () => {
+	const { selectedCategory, setSelectedCategory } = useContext(MapContext); //Destructuring the MapContext
 	const [typedText, setTypedText] = useState(selectedCategory);
 	const [searchedText, setSearchedText] = useState(typedText);
 
